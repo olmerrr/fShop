@@ -37,8 +37,8 @@
       </v-btn>
     </v-app-bar>
     <v-main>
-      main
-      <router-view></router-view>
+    
+    
     </v-main>
   </section>
 </template>

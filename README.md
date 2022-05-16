@@ -1,5 +1,5 @@
 # fshop
-
+vue 2 vuex vuetify router
 ## Project setup
 ```
 npm install
