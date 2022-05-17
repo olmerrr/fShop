@@ -20,7 +20,11 @@
         class="hidden-md-and-up"
         ></v-app-bar-nav-icon>
 
-      <v-toolbar-title>fShop</v-toolbar-title>
+      <v-toolbar-title class="logo">
+        <router-link to="/">
+          fShop
+        </router-link>
+        </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -50,7 +54,7 @@
         sideNav: false,
         links: [
           { title: 'Login', icon: 'mdi-account', url: '/login' },
-          { title: 'Register', icon: 'mdi-license', url: '/register' },
+          { title: 'Registration', icon: 'mdi-license', url: '/registration' },
           { title: 'Cart', icon: 'mdi-shopping', url: '/checkout' },
           { title: 'New Product', icon: 'mdi-file', url: '/new' },
           { title: 'My Products', icon: 'mdi-filter-variant-plus', url: '/list' },
@@ -60,4 +64,17 @@
   };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+  .logo {
+    font-size: 24px;
+    font-weight: 500;
+    cursor: pointer;
+
+    a {
+      text-decoration: none;    
+      color: inherit;
+    }
+  }
+</style>>
+
+

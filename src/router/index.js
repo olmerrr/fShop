@@ -30,9 +30,9 @@ const routes = [
     component: () => import('@/views/auth/LoginView')
   },
   {
-    path: '/register',
-    name: 'RegisterView',
-    component: () => import('@/views/auth/RegisterView')
+    path: '/registration',
+    name: 'RegistrationView',
+    component: () => import('@/views/auth/RegistrationView')
   },
   {
     path: '/checkout',
