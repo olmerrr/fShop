@@ -16,6 +16,7 @@
         label="Password"
         prepend-icon="mdi-security"
         :counter="6"
+        type="password"
         required
       ></v-text-field>
 

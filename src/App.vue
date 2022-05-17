@@ -29,4 +29,9 @@ import NavBar from '@/components/NavBar.vue'
     text-align: center;
     color: #2c3e50;
   }
+  .page-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
 </style>

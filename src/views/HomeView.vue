@@ -150,6 +150,10 @@
       font-weight: 700;
       color: #333;
     }
+    
+    &-description {
+      font-size: 16px;
+    }
 
     &-price {
       margin-top: 16px;
@@ -162,7 +166,14 @@
       color: #fff;
       cursor: pointer;
     }
-
+    
+    @media (max-width: 1260px) { 
+      &-price {
+      max-width: 400px;
+      margin-right: auto;
+      margin-left: auto;
+      }
+    }
     &-img {
       max-width: 500px;
       width: 100%;
@@ -170,7 +181,7 @@
     }
 
     @media (max-width: 1260px) { 
-    &-img {
+      &-img {
       max-width: 400px;
     }
   }
