@@ -32,6 +32,6 @@ import NavBar from '@/components/NavBar.vue'
   .page-title {
     font-size: 24px;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin: 16px 0 20px;
   }
 </style>
