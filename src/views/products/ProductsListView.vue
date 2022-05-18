@@ -6,7 +6,7 @@
 
         <v-card
           class="elevation-6 mb-3 pt-3 pb-3"
-          v-for="product in products"
+          v-for="product in myProducts"
           :key="product.id"
         >
           <v-layout>
@@ -38,51 +38,12 @@
 <script>
   export default {
     name: 'ProductsListView',
-    data() {
-      return {
-        products: [
-          {
-            id: '1',
-            title: 'Acer Aspire 7',
-            vendor: 'Acer',
-            color: 'black',
-            material: 'metal/plastic',
-            description:
-              'Экран 15.6" IPS (1920x1080) Full HD, матовый / AMD Ryzen 5 5500U (2.1 - 4.0 ГГц) / RAM 8 ГБ / SSD 512 ГБ / nVidia GeForce GTX 1650, 4 ГБ / без ОД / LAN / Wi-Fi / Bluetooth / веб-камера / без ОС / 2.15 кг / черный',
-            price: 784,
-            promo: false,
-            imageSrc:
-              'https://content.rozetka.com.ua/goods/images/big_tile/163386254.jpg',
-          },
-          {
-            id: '2',
-            title: 'Lenovo IdeaPad Gaming 3',
-            vendor: 'Lenovo',
-            color: 'blue',
-            material: 'plastic',
-            description:
-              'Экран 15.6" IPS (1920x1080) Full HD, матовый / Intel Core i5-10300H (2.5 - 4.5 ГГц) / RAM 8 ГБ / SSD 256 ГБ / nVidia GeForce GTX 1650, 4 ГБ / без ОД / LAN / Wi-Fi / Bluetooth / веб-камера / DOS / 2.2 кг / blue',
-            price: 884,
-            promo: true,
-            imageSrc:
-              'https://content1.rozetka.com.ua/goods/images/big_tile/251607378.jpg',
-          },
-          {
-            id: '3',
-            title: 'ASUS TUF Gaming F15',
-            vendor: 'ASUS',
-            color: 'black',
-            material: 'metal/plastic',
-            description:
-              'Экран 15.6" IPS (1920x1080) Full HD 144 Гц, матовый / Intel Core i5-10300H (2.5 - 4.5 ГГц) / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce GTX 1650, 4 ГБ / без ОД / LAN / Wi-Fi / Bluetooth / веб-камера / без ОС / 2.3 кг / черный',
-            price: 930,
-            promo: true,
-            imageSrc:
-              'https://content1.rozetka.com.ua/goods/images/big/253177931.jpg',
-          },
-        ],
-      };
-    },
+    computed: {
+      myProducts() {
+        return this.$store.getters.getMyProducts;
+      }
+      
+    }
   };
 </script>
 <style lang="scss" scoped>

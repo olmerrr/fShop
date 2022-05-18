@@ -3,38 +3,43 @@
     <section class="product mt-3 elevation-4">
       <v-layout row wrap>
         <v-flex xs12 lg6>
-          <img
-            class="product__img"
-            src="https://content.rozetka.com.ua/goods/images/big_tile/163386254.jpg"
-          />
+          <img class="product__img" :src="product.imageSrc" />
         </v-flex>
         <v-flex xs12 lg6>
           <div class="product__info">
             <h5 class="product__title display-1 mb-3 mt-3">
-                Title
+              {{ product.title }}
             </h5>
             <p class="product__category title">
-              <span class="product__title">
-                Vendor: 
-              </span>Lorem
+              <span class="product__title"> Vendor: </span
+              >{{
+                product.vendor.charAt(0).toUpperCase() +
+                product.vendor.substr(1)
+              }}
             </p>
-            <p class="product__price title">Price: 1000 $</p>
+            <p class="product__title title">Price: {{ product.price }} $</p>
             <p class="product__color">
               <span class="product__title">Color:</span>
-              <span 
-                :title="'purple'"
-                :style="{backgroundColor: 'purple'}"
+              <span
+                :title="product.color"
+                :style="{ backgroundColor: product.color }"
                 class="product__color-bg"
               ></span>
             </p>
 
             <p class="product__material">
-              <span class="prodict__title">Material: </span>Metal
+              <span class="product__title">Material: </span>
+              {{
+                product.material.charAt(0).toUpperCase() +
+                product.material.substr(1)
+              }}
             </p>
 
             <div class="title mb-5">
               <p class="product__title mb-2">Description:</p>
-              Lorem ipsum dolor sit.
+              <div class="product__description">
+                {{ product.description }}
+              </div>
             </div>
 
             <v-btn color="warning" class="mr-4">Edit</v-btn>
@@ -49,6 +54,18 @@
 <script>
   export default {
     name: 'TheProductView',
+    props: {
+      id: {
+        type: String,
+        default: '1',
+      },
+    },
+    computed: {
+      product() {
+        const id = this.id;
+        return this.$store.getters.getProductById(id);
+      },
+    },
   };
 </script>
 
@@ -64,22 +81,25 @@
     padding: 20px 0;
 
     &__img {
-      height: 100%;
-      width: 550px;
+      height: auto;
+      max-width: 550px;
+      width: 100%;
+    }
+
+    @media (max-width: 1200px) {
+      &__img {
+        max-width: 360px;
+      }
     }
 
     &__info {
-      margin-left: 50px;
+      margin-left: 30px;
     }
 
     &__title {
       font-size: 22px;
       font-weight: 700;
-    }
-
-    &__price {
-      color: tomato;
-      font-weight: 500;
+      margin-right: 8px;
     }
 
     &__color {
@@ -94,6 +114,16 @@
       height: 20px;
       border: 1px solid #2b2b2b;
       border-radius: 10px;
+    }
+
+    &__description {
+      max-width: 560px;
+    }
+
+     @media (max-width: 1200px) {
+      &__description {
+        max-width: 97%;
+      }
     }
   }
 </style>
