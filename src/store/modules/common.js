@@ -22,7 +22,7 @@ export default {
     commit('setError', payload)
    },
    clearError({ commit }) {
-    commit('clearError', )
+    commit('clearError')
    }
   },
   getters: {

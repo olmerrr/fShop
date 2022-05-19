@@ -18,6 +18,7 @@
         :counter="6"
         type="password"
         required
+        v-on:keyup.enter="onSubmit"
       ></v-text-field>
 
 
@@ -65,7 +66,7 @@
            .then(() => {
             this.$router.push('/')
           })
-          .catch(err => console.log(err))
+          .catch(() => {})
         } 
       },
       reset () {

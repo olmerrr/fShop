@@ -1,21 +1,31 @@
 <template>
   <div id="app">
     <v-app>
-      <NavBar/>
-        <router-view></router-view>
+      <NavBar />
+      <router-view></router-view>
+      
+      <template v-if="error">
+        <TheError :error="error"/>
+      </template>
     </v-app>
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
-  
+  import NavBar from '@/components/NavBar.vue';
+  import TheError from '@/components/TheError.vue';
+
   export default {
     components: {
-      NavBar
+      NavBar,
+      TheError
     },
-   
-  }
+    computed: {
+      error() {
+        return this.$store.getters.getError;
+      },
+    },
+  };
 </script>
 
 <style lang="scss">
