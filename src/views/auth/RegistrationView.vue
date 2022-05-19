@@ -3,7 +3,7 @@
     <h2>Registration</h2>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
-        v-model="email"
+        v-model.trim="email"
         :rules="emailRules"
         label="Email"
         prepend-icon="mdi-account-circle"
@@ -11,7 +11,7 @@
       ></v-text-field>
 
       <v-text-field
-        v-model="password"
+        v-model.trim="password"
         :rules="passwordRules"
         type="password"
         label="Password"
@@ -21,16 +21,23 @@
       ></v-text-field>
 
       <v-text-field
-        v-model="confirmPassword"
+        v-model.trim="confirmPassword"
         :rules="confirmPasswordRules"
         type="password"
         label="Confirm Password"
         prepend-icon="mdi-repeat"
         :counter="6"
         required
+        v-on:keyup.enter="onSubmit"
       ></v-text-field>
 
-      <v-btn :disabled="!valid" color="success" class="mr-4" @click="onSubmit">
+      <v-btn 
+        color="success" 
+        class="mr-4" 
+        @click="onSubmit"
+        :disabled="!valid || loading" 
+        :loading="loading"
+        >
         Create Account
       </v-btn>
 
@@ -69,16 +76,24 @@
         if (this.$refs.form.validate()) {
           const userData = {
             email: this.email,
-            password: this.password,
-            confirmPassword: this.confirmPassword,
+            password: this.password
           };
-          console.log(userData);
+          this.$store.dispatch('registrationUser', userData)
+          .then(() => {
+            this.$router.push('/')
+          })
+          .catch(err => console.log(err))
         }
       },
       reset() {
         this.$refs.form.reset();
       },
     },
+    computed: {
+      loading() {
+        return this.$store.getters.getLoading
+      }
+    }
   };
 </script>
 

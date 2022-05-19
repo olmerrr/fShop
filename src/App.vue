@@ -14,10 +14,7 @@ import NavBar from '@/components/NavBar.vue'
     components: {
       NavBar
     },
-    data () {
-      return {
-      }
-    },
+   
   }
 </script>
 

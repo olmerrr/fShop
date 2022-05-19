@@ -21,8 +21,13 @@
       ></v-text-field>
 
 
-      <v-btn :disabled="!valid" color="success" class="mr-4" @click="onSubmit">
-        Submit
+      <v-btn 
+        color="success" 
+        class="mr-4" 
+        @click="onSubmit"
+        :disabled="!valid || loading" 
+        :loading="loading"
+        >Submit
       </v-btn>
 
       <v-btn color="error" class="mr-4" @click="reset"> Reset Form </v-btn>
@@ -56,13 +61,22 @@
             email: this.email,
             password: this.password
           }
-          console.log(userData)
+          this.$store.dispatch('loginUser', userData)
+           .then(() => {
+            this.$router.push('/')
+          })
+          .catch(err => console.log(err))
         } 
       },
       reset () {
         this.$refs.form.reset()
       }
     },
+    computed: {
+      loading() {
+        return this.$store.getters.getLoading
+      }
+    }
   };
 </script>
 
