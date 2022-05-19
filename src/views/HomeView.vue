@@ -84,6 +84,12 @@
     color: #333;
   }
 
+  @media (max-width: 760px) {
+    .carusel-title  {
+      margin: 40px 20px 0;
+    }
+  }
+
   .product-img {
     display: block;
     max-width: 400px;

@@ -1,6 +1,6 @@
 <template>
   <v-container class="login">
-     <h2>Login</h2>
+     <h2 class="page-title">Login</h2>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
         v-model="email"

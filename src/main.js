@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import Vuetify from "vuetify";
 import {initializeApp} from "firebase/app"; 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
@@ -26,6 +27,13 @@ new Vue({
       messagingSenderId: '1077942197911',
       appId: '1:1077942197911:web:1211266df85e54332093d2'
     }
-    initializeApp(config);
+    initializeApp(config)
+    
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        this.$store.dispatch('autoLoginUser', user);
+      }
+    })
   }
 }).$mount('#app')

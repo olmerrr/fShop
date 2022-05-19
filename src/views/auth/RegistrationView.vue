@@ -1,6 +1,6 @@
 <template>
   <v-container class="register">
-    <h2>Registration</h2>
+    <h2 class="page-title">Registration</h2>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
         v-model.trim="email"
@@ -38,7 +38,7 @@
         :disabled="!valid || loading" 
         :loading="loading"
         >
-        Create Account
+        Create
       </v-btn>
 
       <v-btn color="error" class="mr-4" @click="reset"> Reset Form </v-btn>

@@ -39,6 +39,6 @@
   .page-title {
     font-size: 24px;
     font-weight: 700;
-    margin: 16px 0 20px;
+    margin: 60px 0 20px;
   }
 </style>
