@@ -15,8 +15,7 @@
 export default {
   props: {
     error: {
-      type: Error,
-      default: ''
+    default: ''
     }
   },
   methods: {
