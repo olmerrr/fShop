@@ -53,8 +53,7 @@ export default {
     },
     logoutUser({commit}) {
       const auth = getAuth();
-      signOut(auth).then(() =>commit('setUser', null))
-      
+      signOut(auth).then(() => commit('setUser', null))
     } 
   },
   getters: {

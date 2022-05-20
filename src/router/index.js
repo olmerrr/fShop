@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import AuthGuard from './auth-guard'
 Vue.use(VueRouter)
 
 const routes = [
@@ -18,12 +18,14 @@ const routes = [
   {
     path: '/list',
     name: 'ProductsListView',
-    component: () => import('@/views/products/ProductsListView')
+    component: () => import('@/views/products/ProductsListView'),
+    beforeEnter: AuthGuard
   },
   {
     path: '/new',
     name: 'NewProductView',
-    component: () => import('@/views/products/NewProductView')
+    component: () => import('@/views/products/NewProductView'),
+    beforeEnter: AuthGuard
   },
   {
     path: '/login',
@@ -38,7 +40,8 @@ const routes = [
   {
     path: '/checkout',
     name: 'CheckoutView',
-    component: () => import('@/views/CheckoutView')
+    component: () => import('@/views/CheckoutView'),
+    beforeEnter: AuthGuard
   },
   {
     path: '*',
