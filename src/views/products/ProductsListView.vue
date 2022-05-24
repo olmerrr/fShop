@@ -6,8 +6,8 @@
 
         <v-card
           class="elevation-6 mb-3 pt-3 pb-3"
-          v-for="product in myProducts"
-          :key="product.id"
+          v-for="(product, i) in myProducts"
+          :key="i"
         >
           <v-layout>
             <v-flex xs4>

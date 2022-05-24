@@ -20,12 +20,12 @@ new Vue({
   render: h => h(App),
   created() {
     const config = {
-      apiKey: 'AIzaSyDeDaoZE5RMTsJ7fR6i8hNnnm1fcxMPC6U',
-      authDomain: 'fshop-cfb28.firebaseapp.com',
-      projectId: 'fshop-cfb28',
-      storageBucket: 'fshop-cfb28.appspot.com',
-      messagingSenderId: '1077942197911',
-      appId: '1:1077942197911:web:1211266df85e54332093d2'
+      apiKey: "AIzaSyCfv5lacb95RCQ4tPlVObCj25M0XywMxvE",
+      authDomain: "fshop-dc2e4.firebaseapp.com",
+      projectId: "fshop-dc2e4",
+      storageBucket: "fshop-dc2e4.appspot.com",
+      messagingSenderId: "1023451372887",
+      appId: "1:1023451372887:web:b4eaa3fad970a784d7b212"
     }
     initializeApp(config)
     
@@ -35,5 +35,7 @@ new Vue({
         this.$store.dispatch('autoLoginUser', user);
       }
     })
+
+    this.$store.dispatch('fetchProducts')
   }
 }).$mount('#app')

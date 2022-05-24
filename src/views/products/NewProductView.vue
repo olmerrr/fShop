@@ -67,13 +67,16 @@
               <v-switch
                 color='primary'
                 :label="'Add to Promo'"
+                :v-model="promo"
+                @click="handlePromo"
               >
               </v-switch>
             </v-flex>
           </v-layout>
 
           <v-btn
-            :disabled="!valid"
+            :loading="loading"
+            :disabled="!valid || loading"
             color="success"
             class="mr-4"
             @click="onSubmit"
@@ -104,6 +107,9 @@
 };
     },
     methods: {
+      handlePromo() {
+        this.promo = !this.promo;
+      },
       onSubmit() {
         if (this.$refs.form.validate()) {
           const product = {
@@ -115,11 +121,18 @@
             description: this.description,
             promo: this.promo
           }
-          console.log(product)
+          this.$store.dispatch('createProduct', product)
+          .then(() => this.$router.push('/list'))
+          .catch((err) => console.log('Error', err))
         }
       },
       reset () {
         this.$refs.form.reset()
+      }
+    },
+    computed: {
+      loading() {
+        return this.$store.getters.getLoading
       }
     }
   };
