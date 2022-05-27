@@ -11,8 +11,8 @@
               >
                 <v-sheet height="100%" tile>
                   <v-row class="fill-height" align="center" justify="center">
-                    <div class="text-h4 carusel-title">{{ product.title }}</div>
-                    <img :src="product.imageSrc" class="product-img" />
+                    <div class="text-h4 carusel-title">{{ product.name }}</div>
+                    <img :src="product.image" class="product-img" />
                   </v-row>
                 </v-sheet>
               </v-carousel-item>
@@ -24,54 +24,52 @@
       <v-container>
         <section class="card-wrapp">
           <v-flex xs12 v-for="(product, i) in products" :key="i">
-            <router-link
-              :aria-label="product.title"
-              :to="'/product/' + product.id"
-            >
-              <v-card class="card">
-                <img
-                  :src="product.imageSrc"
-                  aspect-ratio="2"
-                  class="card-img"
-                />
+            <v-card class="card">
+              <router-link
+                :aria-label="product.title"
+                :to="'/product/' + product.id"
+              >
+                <img :src="product.image" aspect-ratio="2" class="card-img" />
+
                 <v-card-title primary-title>
-                  <h3 class="headline card-title">{{ product.title }}</h3>
+                  <h3 class="headline card-title">{{ product.name }}</h3>
                   <div class="card-description">
                     {{ product.description.substring(0, 200) }}...
                   </div>
                   <div class="card-price warning">{{ product.price }} $</div>
                 </v-card-title>
+              </router-link>
+              <v-card-actions class="card-buy">
+                <v-btn
+                  dark
+                  color="light-blue darken-4"
+                  rounded
+                  outlined
+                  :to="'/product/' + product.id"
+                  >Description
+                </v-btn>
 
-                <v-card-actions class="card-buy">
-                  <v-btn
-                    dark
-                    color="light-blue darken-4"
-                    rounded
-                    outlined
-                    :to="'/product/' + product.id"
-                    >Description
-                  </v-btn>
-
-                  <v-btn dark color="light-blue darken-4" rounded
-                    >Add to Cart</v-btn
-                  >
-                </v-card-actions>
-              </v-card>
-            </router-link>
+                <v-btn
+                  dark
+                  color="light-blue darken-4"
+                  rounded
+                >
+                  Add to Cart</v-btn
+                >
+              </v-card-actions>
+            </v-card>
           </v-flex>
         </section>
       </v-container>
     </div>
     <div v-else>
-      <v-container>
-        
-          <v-flex xs12 class="text-xs-center pt6">
-                <v-progress-circular
-                  indeterminate
-                  color="purple"
-                ></v-progress-circular>
-          </v-flex>
-  
+      <v-container class="loading">
+        <v-flex xs12 class="text-xs-center pt6">
+          <v-progress-circular
+            indeterminate
+            color="purple"
+          ></v-progress-circular>
+        </v-flex>
       </v-container>
     </div>
   </section>
@@ -105,6 +103,7 @@
   }
 
   .carusel-title {
+    font-weight: 500;
     color: #333;
   }
 
@@ -116,7 +115,7 @@
 
   .product-img {
     display: block;
-    max-width: 400px;
+    max-width: 340px;
     width: 100%;
   }
 
@@ -147,6 +146,7 @@
     margin-bottom: 20px;
 
     &-title {
+      min-width: 200px;
       font-size: 22px;
       font-weight: 700;
       height: 68px;
@@ -155,6 +155,8 @@
 
     &-description {
       font-size: 16px;
+      min-height: 68px;
+      text-align: left;
     }
 
     &-price {
@@ -183,13 +185,18 @@
 
     @media (max-width: 1260px) {
       &-img {
-        max-width: 400px;
+        max-width: 300px;
       }
     }
 
     &-buy {
+      padding-bottom: 20px;
       display: flex;
       justify-content: center;
     }
+  }
+
+  .loading {
+    margin-top: 100px;
   }
 </style>

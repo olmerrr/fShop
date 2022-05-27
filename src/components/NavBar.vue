@@ -89,9 +89,9 @@
             { title: 'Cart', icon: 'mdi-shopping', url: '/checkout' },
             { title: 'New Product', icon: 'mdi-file', url: '/new' },
             {
-              title: 'My Products',
-              icon: 'mdi-filter-variant-plus',
-              url: '/list',
+              title: 'Wish List',
+              icon: 'mdi-cards-heart',
+              url: '/wishlist',
             },
           ];
         } else {

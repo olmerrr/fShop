@@ -17,8 +17,8 @@ const routes = [
   },
   {
     path: '/list',
-    name: 'ProductsListView',
-    component: () => import('@/views/products/ProductsListView'),
+    name: 'WishListView',
+    component: () => import('@/views/products/WishListView'),
     beforeEnter: AuthGuard
   },
   {

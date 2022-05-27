@@ -2,16 +2,16 @@
   <v-container class="products">
     <v-layout row>
       <v-flex xs12>
-        <h2 class="page-title">My Products</h2>
+        <h2 class="page-title">Wish List</h2>
 
         <v-card
           class="elevation-6 mb-3 pt-3 pb-3"
-          v-for="(product, i) in myProducts"
+          v-for="(product, i) in wishList"
           :key="i"
         >
           <v-layout>
             <v-flex xs4>
-              <img class="card-img" :src="product.imageSrc" />
+              <img class="card-img" :src="product.image" />
             </v-flex>
            
             <v-flex xs8>
@@ -39,8 +39,8 @@
   export default {
     name: 'ProductsListView',
     computed: {
-      myProducts() {
-        return this.$store.getters.getMyProducts;
+      wishList() {
+        return this.$store.getters.wishList;
       }
       
     }

@@ -3,37 +3,18 @@
     <section class="product mt-3 elevation-4">
       <v-layout row wrap>
         <v-flex xs12 lg6>
-          <img class="product__img" :src="product.imageSrc" />
+          <img class="product__img" :src="product.image" />
         </v-flex>
         <v-flex xs12 lg6>
           <div class="product__info">
             <h5 class="product__title display-1 mb-3 mt-3">
-              {{ product.title }}
+              {{ product.name }}
             </h5>
             <p class="product__category title">
-              <span class="product__title"> Vendor: </span
-              >{{
-                product.vendor.charAt(0).toUpperCase() +
-                product.vendor.substr(1)
-              }}
+              <span class="product__title"> Release Date: </span>
+              {{ product.releaseDate }}
             </p>
             <p class="product__title title">Price: {{ product.price }} $</p>
-            <p class="product__color">
-              <span class="product__title">Color:</span>
-              <span
-                :title="product.color"
-                :style="{ backgroundColor: product.color }"
-                class="product__color-bg"
-              ></span>
-            </p>
-
-            <p class="product__material">
-              <span class="product__title">Material: </span>
-              {{
-                product.material.charAt(0).toUpperCase() +
-                product.material.substr(1)
-              }}
-            </p>
 
             <div class="title mb-5">
               <p class="product__title mb-2">Description:</p>
@@ -41,9 +22,13 @@
                 {{ product.description }}
               </div>
             </div>
-
-            <v-btn color="warning" class="mr-4">Edit</v-btn>
-            <v-btn color="primary">Buy</v-btn>
+            <div class="product__actions">
+              <v-btn color="warning" class="mr-4">Edit</v-btn>
+              <v-btn 
+                color="primary"
+              >Buy</v-btn>
+            </div>
+          
           </div>
         </v-flex>
       </v-layout>
@@ -78,7 +63,7 @@
     padding: 16px;
     margin-bottom: 50px;
     width: 100%;
-    padding: 20px 0;
+    padding: 60px 0 20px;
 
     &__img {
       height: auto;
@@ -120,10 +105,14 @@
       max-width: 560px;
     }
 
-     @media (max-width: 1200px) {
+    @media (max-width: 1200px) {
       &__description {
         max-width: 97%;
       }
+    }
+
+    &__actions{
+      padding: 16px;
     }
   }
 </style>

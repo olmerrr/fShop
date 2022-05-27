@@ -1,114 +1,37 @@
-import { getDatabase, ref, set, child, get } from "firebase/database";
-
-class Product {
-  constructor(
-    title, 
-    vendor, 
-    color, 
-    material, 
-    price, 
-    description, 
-    ownerId =  Date.now(), 
-    imgSrc = '', 
-    promo = false,
-    id = null
-    ) {
-      this.title = title,
-      this.vendor = vendor,
-      this.color = color,
-      this.material = material,
-      this.price = price,
-      this.description = description,
-      this.ownerId = ownerId,
-      this.imgSrc = imgSrc,
-      this.promo = promo,
-      this.id = id
-    }
-}
+import axios from 'axios';
+import { API_URL } from '@/config';
+import { API_KEY } from '@/config';
 export default {
   state: {
     products: [],
+    cart: []
   },
   mutations: {
-    createProduct(state, payload) {
-      state.products.push(payload)
-    },
     loadProducts(state, payload) {
       state.products = payload
-    }
+    },
   },
   actions: {
-    createProduct({commit, getters}, payload) {
-      commit('clearError')
-      commit('setLoading', true)
-      try {
-        const newProduct = new Product(
-          payload.title,
-          payload.vendor,
-          payload.color,
-          payload.material,
-          payload.price,
-          payload.description,
-          getters.getUser.id,
-          payload.imgSrc,
-          payload.promo
-        )
-        const db = getDatabase();
-         set(ref(db, 'products/' + Date.now()), 
-          newProduct);
-        commit('setLoading', false)
-        commit('createProduct', {
-          ...newProduct,
-          id: new Date().toDateString()
+    fetchData({commit}) {
+        commit('clearError', true);
+        commit('setLoading', true);
+        
+        return axios.get(API_URL,{
+          headers: {
+            Authorization: API_KEY
+          }          
         })
-      } catch (error) {
-        commit('setError', error.message)
+      .then((response) => response)
+      .then(({data}) =>  {
+        data.featured
         commit('setLoading', false)
-        throw error
-      }
+        commit('loadProducts', data.featured)
+      })
+      .catch(err => {
+        console.log(err)
+        throw new Error('Some error')
+      })
     },
-    fetchProducts({commit}) {
-      commit('clearError')
-      commit('setLoading', true)
-      
-      const resultProducts = [] 
-      try {
-        const dbRef = ref(getDatabase());
-        const products = get(child(dbRef, `products/`)).then((snapshot) => {
-          if (snapshot.exists()) {
-            
-            Object.keys(products).forEach(key => {
-              const product = products[key]
-              resultProducts.push(
-                new Product(
-                  product.title,
-                  product.vendor,
-                  product.color,
-                  product.material,
-                  product.price,
-                  product.description,
-                  product.ownerId,
-                  product.imageSrc,
-                  product.promo,
-                  key
-                )
-              )
-              commit('loadProducts', resultProducts)
-              commit('setLoading', false)
-            })
-          } else {
-            console.log("No data available");
-          }
-        }).catch((error) => {
-          console.error(error);
-        });
-        commit('setLoading', false)
-      } catch (error) {
-        commit('setError', error.message)
-        commit('setLoading', false)
-        throw error
-      }
-    }
   },
   getters: {
     getProducts(state) {
@@ -116,16 +39,23 @@ export default {
     },
     getPromoProducts(state) {
       return state.products.filter(product => {
-        return product.promo
+        return product.priority == -2
       })
     },
-    getMyProducts(state) {
-      return state.products
+    wishList(state) {
+      return state.products.filter(product => {
+        if (product.price > 1000) {
+          return product
+        }      
+      })
     },
     getProductById(state) {
       return productId => {
         return state.products.find(product => product.id === productId)
       }
+    },
+    getCart(state) {
+      return state.cart
     }
   },
 }

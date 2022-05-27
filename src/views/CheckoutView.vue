@@ -1,37 +1,35 @@
 <template>
   <v-container class="checkout">
-    <v-layout class="order-wrapp">
-      <v-flex xs12 >
+    <v-layout class="product-wrapp">
+      <v-flex xs12>
         <h2>Cart</h2>
-   
+        <section 
+          class="cart"
+          v-if="cart">
+          <div v-for="product in cart" :key="product.id" class="product">
+            <v-checkbox
+              color="success"
+              @change="markDone(product)"
+              :input-value="product.done"
+            >
+            </v-checkbox>
+            <v-list-item-title>{{ product.name }}</v-list-item-title>
+            <div class="product-phone">{{ product.phone }}</div>
 
-          <div
-            v-for="order in orders"
-            :key="order.id"
-            class="order"
-          >
-     
-              <v-checkbox 
-                color="success"
-                @change="markDone(order)"
-                :input-value="order.done"
-                >
-              </v-checkbox>
-
-          
-           
-          
-              <v-list-item-title>{{ order.name }}</v-list-item-title>
-              <div class="order-phone">{{ order.phone }}</div>
-          
-            <v-btn 
-              class="primary"
-              :to="'/product/' + order.productId"
-              >Open</v-btn>
+            <v-btn class="primary" :to="'/product/' + product.productId"
+              >Open</v-btn
+            >
           </div>
-       
-   
-        
+        </section>
+        <section class="empty-cart">
+          <img
+            class="empty-cart__img"
+            src="@/assets/cart/empty_cart-512.webp"
+          />
+          <p class="empty-cart">
+            Sorry, but in your cart empty       <v-icon>mdi-emoticon-sad-outline</v-icon>
+          </p>
+        </section>
       </v-flex>
     </v-layout>
   </v-container>
@@ -40,40 +38,46 @@
 <script>
   export default {
     name: 'CheckoutView',
-    data() {
-      return {
-        orders: [
-          {
-            id: 1,
-            name: 'Lenovo',
-            phone: '020-21-0123',
-            productId: 1,
-            done: false
-            }
-        ]
-      }
+    computed: {
+      cart() {
+        return this.$store.getters.getCart;
+      },
     },
     methods: {
-      markDone(order) {
-        order.done = true;
-      }
-    }
+      markDone(product) {
+        product.done = true;
+      },
+    },
   };
 </script>
 
-<style scoped>
-  .order {
+<style lang="scss" scoped>
+  .product {
     padding: 0 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 1px 2px 2px 1px rgba(0, 0, 255, .2);
-}
+    box-shadow: 1px 2px 2px 1px rgba(0, 0, 255, 0.2);
+  }
 
-.order-phone {
-  color: rgb(41, 40, 40);
-  font-weight: 500;
-  width: 200px;
-  display: inline;
+  .product-phone {
+    color: rgb(41, 40, 40);
+    font-weight: 500;
+    width: 200px;
+    display: inline;
+  }
+
+  .empty-cart {
+    margin-top: 24px;
+
+    &__img {
+      max-width: 400px;
+    }
+
+    @media (max-width: 460px) {
+     &__img {
+      max-width: 200px;
+    }
+  }
 }
 </style>

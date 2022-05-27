@@ -46,17 +46,28 @@
 
           <v-layout>
             <v-flex xs12 mb-4>
-              <v-btn class="warning">
+              <v-btn 
+                class="warning"
+                @click="upload"
+                >
                 Upload
                 <v-icon right dark>mdi-cloud-upload</v-icon>
               </v-btn>
+              <input 
+                class="file-loader"
+                type="file"
+                accept="image/*"
+                ref="fileInput"
+                @change="onFileChange"
+                />
             </v-flex>
           </v-layout>
 
           <v-layout>
             <v-flex xs12 mb-4>
               <img
-                src=''
+              v-if="imageSrc"
+                :src='imageSrc'
                 height="200"
               />
             </v-flex>
@@ -76,7 +87,7 @@
 
           <v-btn
             :loading="loading"
-            :disabled="!valid || loading"
+            :disabled="!valid || !image ||loading "
             color="success"
             class="mr-4"
             @click="onSubmit"
@@ -103,15 +114,30 @@
         price: 0,
         description: '',
         promo: false,
-        valid: false
+        valid: false,
+        image: null,
+        imageSrc: ''
 };
     },
     methods: {
       handlePromo() {
         this.promo = !this.promo;
       },
+      upload() {
+        this.$refs.fileInput.click()
+      },
+      onFileChange(event) {
+        const file = event.target.files[0]
+        const reader = new FileReader()
+        reader.onload = e => {
+            this.imageSrc = reader.result
+            console.log(e)
+        }
+        reader.readAsDataURL(file)
+        this.image = file
+      },
       onSubmit() {
-        if (this.$refs.form.validate()) {
+        if (this.$refs.form.validate() && this.image) {
           const product = {
             title: this.title,
             vendor: this.vendor,
@@ -119,7 +145,8 @@
             color: this.color,
             price: this.price,
             description: this.description,
-            promo: this.promo
+            promo: this.promo,
+            image: this.image
           }
           this.$store.dispatch('createProduct', product)
           .then(() => this.$router.push('/list'))
@@ -140,5 +167,9 @@
 <style scoped>
   .text-area-wrapp {
     padding: 0;
+  }
+
+  .file-loader {
+    display: none;
   }
 </style>
