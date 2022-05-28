@@ -53,6 +53,7 @@
                   dark
                   color="light-blue darken-4"
                   rounded
+                  @click="addToCart(product)"
                 >
                   Add to Cart</v-btn
                 >
@@ -89,6 +90,11 @@
         return this.$store.getters.getLoading;
       },
     },
+    methods: {
+      addToCart(product) {
+        this.$store.commit('addToCart', product);
+      }
+    }
   };
 </script>
 <style lang="scss" scoped>

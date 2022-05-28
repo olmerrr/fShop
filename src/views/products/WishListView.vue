@@ -24,7 +24,8 @@
                       class="mt-4 info " 
                       width='100'
                       :to="'/product/' + product.id"
-                      >Open</v-btn>
+                      >Open
+                    </v-btn>
                   </v-card-actions>
               </v-card-text>
             </v-flex>

@@ -4,11 +4,16 @@ import { API_KEY } from '@/config';
 export default {
   state: {
     products: [],
+    cartCount: 0,
     cart: []
   },
   mutations: {
     loadProducts(state, payload) {
       state.products = payload
+    },
+    addToCart(state, payload) {
+      state.cart.push(payload)
+      state.cartCount++;
     },
   },
   actions: {
@@ -54,8 +59,11 @@ export default {
         return state.products.find(product => product.id === productId)
       }
     },
+    getCartCount(state) {
+      return state.cartCount
+    },
     getCart(state) {
       return state.cart
-    }
+    },
   },
 }

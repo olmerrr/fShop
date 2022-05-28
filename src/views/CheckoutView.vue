@@ -5,8 +5,8 @@
         <h2>Cart</h2>
         <section 
           class="cart"
-          v-if="cart">
-          <div v-for="product in cart" :key="product.id" class="product">
+          v-if="cart.length">
+          <div v-for="(product, index) in cart" :key="index" class="product">
             <v-checkbox
               color="success"
               @change="markDone(product)"
@@ -16,12 +16,14 @@
             <v-list-item-title>{{ product.name }}</v-list-item-title>
             <div class="product-phone">{{ product.phone }}</div>
 
-            <v-btn class="primary" :to="'/product/' + product.productId"
+            <v-btn class="primary" :to="'/product/' + product.id"
               >Open</v-btn
             >
           </div>
         </section>
-        <section class="empty-cart">
+        <section 
+        v-else
+        class="empty-cart">
           <img
             class="empty-cart__img"
             src="@/assets/cart/empty_cart-512.webp"
@@ -53,7 +55,7 @@
 
 <style lang="scss" scoped>
   .product {
-    padding: 0 16px;
+    padding: 24px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -68,8 +70,6 @@
   }
 
   .empty-cart {
-    margin-top: 24px;
-
     &__img {
       max-width: 400px;
     }

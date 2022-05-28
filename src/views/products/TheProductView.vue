@@ -23,9 +23,9 @@
               </div>
             </div>
             <div class="product__actions">
-              <v-btn color="warning" class="mr-4">Edit</v-btn>
-              <v-btn 
+              <v-btn
                 color="primary"
+                @click="addToCart(product)"
               >Buy</v-btn>
             </div>
           
@@ -48,9 +48,14 @@
     computed: {
       product() {
         const id = this.id;
-        return this.$store.getters.getProductById(id);
+          return this.$store.getters.getProductById(id);
       },
     },
+    methods: {
+      addToCart(product) {
+        this.$store.commit('addToCart', product);
+      }
+    }
   };
 </script>
 

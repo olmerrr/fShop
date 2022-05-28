@@ -16,10 +16,10 @@ const routes = [
     component: () => import('@/views/products/TheProductView')
   },
   {
-    path: '/list',
+    path: '/wishlist',
     name: 'WishListView',
     component: () => import('@/views/products/WishListView'),
-    beforeEnter: AuthGuard
+    // beforeEnter: AuthGuard
   },
   {
     path: '/new',
@@ -41,7 +41,7 @@ const routes = [
     path: '/checkout',
     name: 'CheckoutView',
     component: () => import('@/views/CheckoutView'),
-    beforeEnter: AuthGuard
+    // beforeEnter: AuthGuard
   },
   {
     path: '*',

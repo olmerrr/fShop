@@ -86,17 +86,17 @@
       links() {
         if (this.isUserLoggedIn) {
           return [
-            { title: 'Cart', icon: 'mdi-shopping', url: '/checkout' },
             { title: 'New Product', icon: 'mdi-file', url: '/new' },
+          ];
+        } else {
+          return [
+            { title: `Cart ${this.$store.getters.getCartCount}`, icon: 'mdi-shopping', url: '/checkout'},
             {
               title: 'Wish List',
               icon: 'mdi-cards-heart',
               url: '/wishlist',
             },
-          ];
-        } else {
-          return [
-            { title: 'Login', icon: 'mdi-account', url: '/login' },
+               { title: 'Login', icon: 'mdi-account', url: '/login' },
             {
               title: 'Registration',
               icon: 'mdi-license',
