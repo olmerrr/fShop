@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '@/config';
-import { API_KEY } from '@/config';
+
 export default {
   state: {
     products: [],
@@ -23,7 +23,7 @@ export default {
         
         return axios.get(API_URL,{
           headers: {
-            Authorization: API_KEY
+            Authorization: 'cf652cde-54514fce-b9be9f78-c9fa49d1'
           }          
         })
       .then((response) => response)
