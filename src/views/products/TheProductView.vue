@@ -26,7 +26,9 @@
               <v-btn
                 color="primary"
                 @click="addToCart(product)"
-              >Buy</v-btn>
+                :disabled="cart.includes(product)"
+              >{{cart.includes(product) ? 'Allready in Cart' : 'Buy'}}
+              </v-btn>
             </div>
           
           </div>
@@ -50,6 +52,10 @@
         const id = this.id;
           return this.$store.getters.getProductById(id);
       },
+       cart() {
+        return this.$store.getters.getCart;
+      },
+      
     },
     methods: {
       addToCart(product) {

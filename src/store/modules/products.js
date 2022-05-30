@@ -12,7 +12,7 @@ export default {
       state.products = payload
     },
     addToCart(state, payload) {
-      state.cart.push(payload)
+      state.cart.push(payload);
       state.cartCount++;
     },
     removeFromCart(state, payload) {

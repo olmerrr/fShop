@@ -54,8 +54,10 @@
                   color="light-blue darken-4"
                   rounded
                   @click="addToCart(product)"
+                  :disabled="cart.includes(product)"
                 >
-                  Add to Cart</v-btn
+                  Add to Cart
+                </v-btn
                 >
               </v-card-actions>
             </v-card>
@@ -83,6 +85,9 @@
       products() {
         return this.$store.getters.getProducts;
       },
+      cart() {
+        return this.$store.getters.getCart;
+      },
       promoProducts() {
         return this.$store.getters.getPromoProducts;
       },
@@ -93,11 +98,8 @@
     methods: {
       addToCart(product) {
         this.$store.commit('addToCart', product);
-      }
+      },
     },
-    mounted() {
-       this.$set(this.products, 'quantity', 1)
-    }
   };
 </script>
 
