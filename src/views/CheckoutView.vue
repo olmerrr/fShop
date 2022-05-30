@@ -14,11 +14,19 @@
             >
             </v-checkbox>
             <v-list-item-title>{{ product.name }}</v-list-item-title>
-            <div class="product-phone">{{ product.phone }}</div>
+            <div class="product-phone">{{ product.price }}</div>
 
-            <v-btn class="primary" :to="'/product/' + product.id"
-              >Open</v-btn
+            <v-btn 
+              class="error mr-3"
+              @click="removeItem(product.id)"
+              >Remove
+            </v-btn
             >
+            <v-btn class="primary" :to="'/product/' + product.id"
+              >Open
+            </v-btn
+            >
+
           </div>
         </section>
         <section 
@@ -49,6 +57,10 @@
       markDone(product) {
         product.done = true;
       },
+      removeItem(id) {
+         this.$store.commit('removeFromCart', id);
+      },
+      
     },
   };
 </script>

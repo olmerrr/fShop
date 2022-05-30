@@ -15,6 +15,10 @@ export default {
       state.cart.push(payload)
       state.cartCount++;
     },
+    removeFromCart(state, payload) {
+      state.cart = state.cart.filter(product => product.id !== payload)
+      state.cartCount--;
+    },
   },
   actions: {
     fetchData({commit}) {

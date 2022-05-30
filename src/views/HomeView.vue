@@ -94,9 +94,13 @@
       addToCart(product) {
         this.$store.commit('addToCart', product);
       }
+    },
+    mounted() {
+       this.$set(this.products, 'quantity', 1)
     }
   };
 </script>
+
 <style lang="scss" scoped>
   .home__wrap {
     display: grid;
