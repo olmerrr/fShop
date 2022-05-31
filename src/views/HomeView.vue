@@ -23,7 +23,7 @@
 
       <v-container>
         <section class="filters">
-          <h2 class="filters__title">Filters</h2>
+          <h2 class="filters__title">Categories</h2>
           <v-select
             v-model="filters.selectedCategories"
             label="Caregory Type"
