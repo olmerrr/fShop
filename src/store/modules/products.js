@@ -69,5 +69,9 @@ export default {
     getCart(state) {
       return state.cart
     },
+    getTotalPrice(state) {
+      return state.cart.map((item) => item.price)
+      .reduce((acc, value) => acc + value, 0)
+    }
   },
 }

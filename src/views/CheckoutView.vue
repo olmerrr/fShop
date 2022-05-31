@@ -14,7 +14,7 @@
             >
             </v-checkbox>
             <v-list-item-title>{{ product.name }}</v-list-item-title>
-            <div class="product-phone">{{ product.price }}</div>
+            <div class="product-price">{{ product.price }} $</div>
 
             <v-btn 
               class="error mr-3"
@@ -28,6 +28,7 @@
             >
 
           </div>
+          <div class="total-price warning">{{totalPrice}} $</div>
         </section>
         <section 
         v-else
@@ -37,7 +38,8 @@
             src="@/assets/cart/empty_cart-512.webp"
           />
           <p class="empty-cart">
-            Sorry, but in your cart empty       <v-icon>mdi-emoticon-sad-outline</v-icon>
+            Sorry, but in your cart empty
+            <v-icon>mdi-emoticon-sad-outline</v-icon>
           </p>
         </section>
       </v-flex>
@@ -52,6 +54,9 @@
       cart() {
         return this.$store.getters.getCart;
       },
+      totalPrice() {
+        return this.$store.getters.getTotalPrice;
+      }
     },
     methods: {
       markDone(product) {
@@ -74,13 +79,20 @@
     box-shadow: 1px 2px 2px 1px rgba(0, 0, 255, 0.2);
   }
 
-  .product-phone {
+  .product-price {
     color: rgb(41, 40, 40);
     font-weight: 500;
     width: 200px;
     display: inline;
   }
-
+  .total-price {
+    margin-top: 20px;
+    padding: 5px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 2px;
+  }
   .empty-cart {
     &__img {
       max-width: 400px;
