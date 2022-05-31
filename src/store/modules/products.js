@@ -19,6 +19,7 @@ export default {
       state.cart = state.cart.filter(product => product.id !== payload)
       state.cartCount--;
     },
+
   },
   actions: {
     fetchData({commit}) {
@@ -72,6 +73,7 @@ export default {
     getTotalPrice(state) {
       return state.cart.map((item) => item.price)
       .reduce((acc, value) => acc + value, 0)
-    }
+    },
+   
   },
 }

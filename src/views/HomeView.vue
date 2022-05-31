@@ -22,8 +22,36 @@
       </v-container>
 
       <v-container>
+        <section class="filters">
+          <h2 class="filters__title">Filters</h2>
+          <v-select
+            v-model="filters.selectedCategories"
+            label="Caregory Type"
+          >
+            <template v-slot:prepend-item>
+              <v-list-item
+                class="filter-item"
+                v-for="(item, index) in products"
+                :key="index"
+                ripple
+                @mousedown.prevent
+                @change="sortByType(item.type)"
+              >
+                <v-list-item-content>
+                  <v-list-item-title>
+                    {{ item.type }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+          </v-select>
+        </section>
+        
         <section class="card-wrapp">
-          <v-flex xs12 v-for="(product, i) in products" :key="i">
+          <v-flex xs12 
+            v-for="(product, i) in !filters.isOpenFilter ? products : sortedProducts" 
+            :key="i">
+
             <v-card class="card">
               <router-link
                 :aria-label="product.title"
@@ -57,8 +85,7 @@
                   :disabled="cart.includes(product)"
                 >
                   Add to Cart
-                </v-btn
-                >
+                </v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -81,6 +108,15 @@
 <script>
   export default {
     name: 'HomeView',
+    data() {
+      return {
+        sortedProducts: [],
+        filters: {
+          isOpenFilter: false,
+          selectedCategories: ''
+        },
+      };
+    },
     computed: {
       products() {
         return this.$store.getters.getProducts;
@@ -91,6 +127,7 @@
       promoProducts() {
         return this.$store.getters.getPromoProducts;
       },
+
       loading() {
         return this.$store.getters.getLoading;
       },
@@ -98,6 +135,26 @@
     methods: {
       addToCart(product) {
         this.$store.commit('addToCart', product);
+      },
+      
+      sortByType(type) {
+        this.filters.isOpenFilter = true;
+        this.sortedProducts = [];
+        
+        this.products.map((product) => {
+          if (product.type == type) {
+            this.sortedProducts.push(product);
+          } else return this.products;
+        });
+      },
+      sortByPrice() {
+        // let ctx = this;
+
+        // this.sortedProducts = [...this.products]
+        // this.sortedProducts = this.products.filter(product => {
+        //   return product.price >= ctx.filters.price.min && product.price 
+        //   <= ctx.filters.price.max
+        // })
       },
     },
   };
@@ -152,6 +209,10 @@
     .card-wrapp {
       flex-wrap: wrap;
     }
+  }
+  
+  .filter-item {
+    cursor: pointer;
   }
 
   .card {
